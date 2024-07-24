@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{id}",
+ "creation": "2024-07-15 10:03:38.619983",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ahbm",
+  "id",
+  "operation",
+  "blocked_by_operation",
+  "quantity",
+  "soft_safety_lead_time",
+  "hard_safety_lead_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ahbm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "label": "Operation",
+   "options": "Frepple Operation"
+  },
+  {
+   "fieldname": "blocked_by_operation",
+   "fieldtype": "Link",
+   "label": "Blocked by operation",
+   "options": "Frepple Operation"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "soft_safety_lead_time",
+   "fieldtype": "Duration",
+   "label": "Soft safety lead time"
+  },
+  {
+   "fieldname": "hard_safety_lead_time",
+   "fieldtype": "Duration",
+   "label": "Hard safety lead time"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "label": "ID"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-18 11:05:35.451789",
+ "modified_by": "Administrator",
+ "module": "Frepple",
+ "name": "Frepple Operation Dependencies",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

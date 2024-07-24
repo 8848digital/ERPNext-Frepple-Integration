@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{id}",
+ "creation": "2024-07-12 15:46:42.662789",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_24li",
+  "id",
+  "operation",
+  "priority",
+  "suboperation",
+  "effective_start",
+  "effective_end"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_24li",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "operation",
+   "fieldtype": "Link",
+   "label": "Operation",
+   "options": "Frepple Operation"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Data",
+   "label": "Priority"
+  },
+  {
+   "fieldname": "suboperation",
+   "fieldtype": "Link",
+   "label": "Suboperation",
+   "options": "Frepple Operation"
+  },
+  {
+   "fieldname": "effective_start",
+   "fieldtype": "Date",
+   "label": "Effective start"
+  },
+  {
+   "fieldname": "effective_end",
+   "fieldtype": "Date",
+   "label": "Effective end"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "label": "ID"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-18 11:09:52.014315",
+ "modified_by": "Administrator",
+ "module": "Frepple",
+ "name": "Frepple Sub Operations",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

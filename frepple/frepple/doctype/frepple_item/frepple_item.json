@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "field:item",
  "creation": "2022-01-25 16:10:00.329465",
  "doctype": "DocType",
@@ -10,7 +11,21 @@
   "description",
   "stock_uom",
   "valuation_rate",
-  "item_group"
+  "item_group",
+  "additional_information_tab",
+  "category",
+  "column_break_rn1g",
+  "subcategory",
+  "section_break_dxex",
+  "type",
+  "column_break_4foi",
+  "volume",
+  "column_break_wflt",
+  "successor_part",
+  "section_break_ngjf",
+  "shelf_life",
+  "column_break_le9t",
+  "weight"
  ],
  "fields": [
   {
@@ -55,12 +70,79 @@
    "fieldtype": "Link",
    "label": "Owner",
    "options": "Item Group"
+  },
+  {
+   "fieldname": "additional_information_tab",
+   "fieldtype": "Tab Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "label": "Category"
+  },
+  {
+   "fieldname": "subcategory",
+   "fieldtype": "Data",
+   "label": "Sub Category"
+  },
+  {
+   "fieldname": "section_break_dxex",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "make to stock\nmake to order"
+  },
+  {
+   "fieldname": "column_break_4foi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "volume",
+   "fieldtype": "Data",
+   "label": "Volume"
+  },
+  {
+   "fieldname": "column_break_wflt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "successor_part",
+   "fieldtype": "Data",
+   "label": "Successor part"
+  },
+  {
+   "fieldname": "section_break_ngjf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "shelf_life",
+   "fieldtype": "Duration",
+   "label": "Shelf life"
+  },
+  {
+   "fieldname": "column_break_le9t",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "label": "Weight"
+  },
+  {
+   "fieldname": "column_break_rn1g",
+   "fieldtype": "Column Break"
   }
  ],
- "modified": "2022-02-11 10:41:25.578808",
+ "links": [],
+ "modified": "2024-07-17 15:59:29.535561",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Item",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -78,5 +160,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

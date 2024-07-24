@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "format:{item}-{operation}",
  "creation": "2022-01-26 16:27:20.569455",
  "doctype": "DocType",
@@ -9,7 +10,24 @@
   "item",
   "item_name",
   "type",
-  "quantity"
+  "quantity",
+  "additional_information_tab",
+  "quantity_details_section",
+  "fixed_qty",
+  "column_break_mdsl",
+  "trnfd_batch_qty",
+  "section_break_5do9",
+  "offset",
+  "section_break_nhul",
+  "effective_start",
+  "column_break_gvqd",
+  "effective_end",
+  "section_break_fwtx",
+  "alt_name",
+  "column_break_ohmo",
+  "search_mode",
+  "section_break_lksk",
+  "priority"
  ],
  "fields": [
   {
@@ -48,12 +66,93 @@
    "fieldname": "item_name",
    "fieldtype": "Data",
    "label": "Item Name"
+  },
+  {
+   "fieldname": "additional_information_tab",
+   "fieldtype": "Tab Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "quantity_details_section",
+   "fieldtype": "Section Break",
+   "label": "Quantity Details"
+  },
+  {
+   "fieldname": "fixed_qty",
+   "fieldtype": "Float",
+   "label": "Fixed Quantity"
+  },
+  {
+   "fieldname": "column_break_mdsl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "trnfd_batch_qty",
+   "fieldtype": "Float",
+   "label": "Transfer batch quantity"
+  },
+  {
+   "fieldname": "section_break_5do9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "offset",
+   "fieldtype": "Duration",
+   "label": "Offset"
+  },
+  {
+   "fieldname": "section_break_nhul",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "effective_start",
+   "fieldtype": "Date",
+   "label": "Effective Start Time"
+  },
+  {
+   "fieldname": "column_break_gvqd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "effective_end",
+   "fieldtype": "Date",
+   "label": "Effective End Time"
+  },
+  {
+   "fieldname": "section_break_fwtx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "alt_name",
+   "fieldtype": "Data",
+   "label": "Alternate Name"
+  },
+  {
+   "fieldname": "column_break_ohmo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Data",
+   "label": "Priority"
+  },
+  {
+   "fieldname": "search_mode",
+   "fieldtype": "Select",
+   "label": "Search Mode",
+   "options": "\npriority\nminimum cost\nminimum penalty\nminimum cost plus penalty"
+  },
+  {
+   "fieldname": "section_break_lksk",
+   "fieldtype": "Section Break"
   }
  ],
- "modified": "2022-01-31 14:23:16.684040",
+ "links": [],
+ "modified": "2024-07-18 09:41:30.149753",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Operation Material",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -71,5 +170,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

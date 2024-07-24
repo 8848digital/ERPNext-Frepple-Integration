@@ -1,0 +1,52 @@
+{
+    "Operation": [
+      
+        {
+        "fieldname": "type",
+        "label": "Type",
+        "fieldtype": "Select",
+        "options":"\nFixed Time\nTime Per\nRouting\nAlternate\nSplit",
+        "module": "Frepple",
+        "insert_after": "description"
+        },
+     
+        {
+            "fieldname": "location",
+            "label": "Location",
+            "fieldtype": "Link",
+            "options":"Warehouse",
+            "module": "Frepple",
+            "insert_after": "type"
+        },
+        {
+            "fieldname": "duration",
+            "label": "Duration",
+            "fieldtype": "Duration",
+            "module": "Frepple",
+            "insert_after":"location"
+        },
+        {
+            "fieldname": "duration_per",
+            "label": "Duration Per Unit",
+            "fieldtype": "Duration",
+            "module": "Frepple",
+            "insert_after":"duration"
+        },
+        {
+            "fieldname": "priority",
+            "label": "Priority",
+            "fieldtype": "Data",
+            "module": "Frepple",
+            "insert_after": "duration"
+        },
+        {
+            "fieldname": "item",
+            "label": "Item",
+            "fieldtype": "Link",
+            "options":"Item",
+            "module": "Frepple",
+            "insert_after": "priority"
+        }
+
+    ]
+}

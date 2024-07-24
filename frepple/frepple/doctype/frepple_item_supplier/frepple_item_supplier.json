@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "format:{supplier}@{item}",
  "creation": "2022-01-26 13:18:48.110700",
  "doctype": "DocType",
@@ -12,7 +13,23 @@
   "lead_time_section",
   "day",
   "column_break_6",
-  "time"
+  "time",
+  "additional_information_tab",
+  "effective_start",
+  "column_break_kvhl",
+  "effective_end",
+  "lead_time_details_section",
+  "hard_safety_leadtime",
+  "column_break_kqfg",
+  "extra_safety_leadtime",
+  "column_break_55fp",
+  "leadtime",
+  "section_break_yau4",
+  "size_minimum",
+  "column_break_umrp",
+  "size_maximum",
+  "column_break_1coh",
+  "size_multiple"
  ],
  "fields": [
   {
@@ -63,9 +80,84 @@
    "fieldname": "description",
    "fieldtype": "Data",
    "label": "Description"
+  },
+  {
+   "fieldname": "additional_information_tab",
+   "fieldtype": "Tab Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "effective_start",
+   "fieldtype": "Date",
+   "label": "Effective Start Time"
+  },
+  {
+   "fieldname": "column_break_kvhl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "effective_end",
+   "fieldtype": "Date",
+   "label": "Effective End Time"
+  },
+  {
+   "fieldname": "lead_time_details_section",
+   "fieldtype": "Section Break",
+   "label": "Lead Time Details"
+  },
+  {
+   "fieldname": "hard_safety_leadtime",
+   "fieldtype": "Duration",
+   "label": "Hard Safety Leadtime"
+  },
+  {
+   "fieldname": "column_break_kqfg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "extra_safety_leadtime",
+   "fieldtype": "Duration",
+   "label": "Soft Safety Leadtime"
+  },
+  {
+   "fieldname": "column_break_55fp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "leadtime",
+   "fieldtype": "Duration",
+   "label": "Lead Time"
+  },
+  {
+   "fieldname": "section_break_yau4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "size_minimum",
+   "fieldtype": "Float",
+   "label": "Maximum Size"
+  },
+  {
+   "fieldname": "column_break_umrp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "size_maximum",
+   "fieldtype": "Float",
+   "label": "Minimum Size"
+  },
+  {
+   "fieldname": "column_break_1coh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "size_multiple",
+   "fieldtype": "Data",
+   "label": "Multiple Size"
   }
  ],
- "modified": "2022-01-28 10:30:31.385386",
+ "links": [],
+ "modified": "2024-07-17 17:09:57.997860",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Item Supplier",
@@ -86,5 +178,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

@@ -12,7 +12,7 @@ frappe.ui.form.on("Sales Order",{
         })
         
         //By default add 4 days to the delivery date
-        if (frm.docstatus !== 1){
+        if ((frm.docstatus !== 1) && (frm.is_new())){
             var date = frappe.datetime.add_days(frm.doc.transaction_date, 4); 
             frm.set_value("delivery_date", date); 
         }

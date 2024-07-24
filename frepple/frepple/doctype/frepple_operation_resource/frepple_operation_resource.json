@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "format:{resource}-{operation}",
  "creation": "2022-01-26 16:02:43.716880",
  "doctype": "DocType",
@@ -11,7 +12,17 @@
   "section_break_4",
   "resource",
   "quantity",
-  "skill"
+  "skill",
+  "or_owner",
+  "additional_information_tab",
+  "alt_name",
+  "effective_start",
+  "effective_end",
+  "offset",
+  "fixed_qty",
+  "setup",
+  "priority",
+  "search_mode"
  ],
  "fields": [
   {
@@ -62,12 +73,66 @@
   {
    "fieldname": "section_break_4",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "additional_information_tab",
+   "fieldtype": "Tab Break",
+   "label": "Additional Information"
+  },
+  {
+   "default": "0",
+   "fieldname": "fixed_qty",
+   "fieldtype": "Float",
+   "label": "FIxed Quantity"
+  },
+  {
+   "fieldname": "setup",
+   "fieldtype": "Data",
+   "label": "Setup"
+  },
+  {
+   "fieldname": "offset",
+   "fieldtype": "Duration",
+   "label": "Offset"
+  },
+  {
+   "fieldname": "alt_name",
+   "fieldtype": "Data",
+   "label": "Alternate Name"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Data",
+   "label": "Priority"
+  },
+  {
+   "fieldname": "effective_start",
+   "fieldtype": "Date",
+   "label": "Effective Start Time"
+  },
+  {
+   "fieldname": "effective_end",
+   "fieldtype": "Date",
+   "label": "Effective End Time"
+  },
+  {
+   "fieldname": "search_mode",
+   "fieldtype": "Select",
+   "label": "Search Mode",
+   "options": "\npriority\nminimum cost\nminimum penalty\nminimum cost plus penalty"
+  },
+  {
+   "fieldname": "or_owner",
+   "fieldtype": "Data",
+   "label": "Owner"
   }
  ],
- "modified": "2022-01-31 12:34:01.988476",
+ "links": [],
+ "modified": "2024-07-22 14:04:58.094050",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Operation Resource",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -85,5 +150,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

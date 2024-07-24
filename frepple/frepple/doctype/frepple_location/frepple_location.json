@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "field:warehouse",
  "creation": "2022-01-26 10:43:28.798877",
  "doctype": "DocType",
@@ -7,7 +8,11 @@
  "field_order": [
   "warehouse",
   "available",
-  "location_owner"
+  "location_owner",
+  "additional_details_tab",
+  "category",
+  "subcategory",
+  "description"
  ],
  "fields": [
   {
@@ -32,9 +37,30 @@
    "in_list_view": 1,
    "label": "Owner",
    "options": "Frepple Location"
+  },
+  {
+   "fieldname": "additional_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Additional Details"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "label": "Category"
+  },
+  {
+   "fieldname": "subcategory",
+   "fieldtype": "Data",
+   "label": "Subcategory"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
   }
  ],
- "modified": "2022-01-28 13:24:33.866918",
+ "links": [],
+ "modified": "2024-07-17 16:01:27.121865",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Location",
@@ -55,5 +81,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

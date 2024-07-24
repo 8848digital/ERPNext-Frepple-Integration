@@ -1,0 +1,156 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{id}",
+ "creation": "2024-07-12 14:25:41.507378",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_qcxg",
+  "id",
+  "column_break_bifp",
+  "item",
+  "section_break_xapd",
+  "location",
+  "reorder_quantity_tab",
+  "roq_minimum_quantity",
+  "roq_maximum_quantity",
+  "roq_minimum_period_of_cover",
+  "roq_maximum_period_of_cover",
+  "safety_stock_quantity_tab",
+  "service_level",
+  "demand_deviation",
+  "lead_time",
+  "lead_time_deviation",
+  "safety_stock_minimum_quantity",
+  "safety_stock_maximum_quantity",
+  "safety_stock_minimum_period_of_cover",
+  "safety_stock_maximum_period_of_cover"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_qcxg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Frepple Item"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "Location",
+   "options": "Frepple Location"
+  },
+  {
+   "fieldname": "reorder_quantity_tab",
+   "fieldtype": "Tab Break",
+   "label": "Reorder Quantity"
+  },
+  {
+   "fieldname": "roq_minimum_quantity",
+   "fieldtype": "Int",
+   "label": "ROQ minimum quantity"
+  },
+  {
+   "fieldname": "roq_maximum_quantity",
+   "fieldtype": "Int",
+   "label": "ROQ maximum quantity"
+  },
+  {
+   "fieldname": "roq_minimum_period_of_cover",
+   "fieldtype": "Duration",
+   "label": "ROQ minimum period of cover"
+  },
+  {
+   "fieldname": "roq_maximum_period_of_cover",
+   "fieldtype": "Duration",
+   "label": "ROQ maximum period of cover"
+  },
+  {
+   "fieldname": "safety_stock_quantity_tab",
+   "fieldtype": "Tab Break",
+   "label": "Safety Stock Quantity"
+  },
+  {
+   "fieldname": "service_level",
+   "fieldtype": "Data",
+   "label": "Service level"
+  },
+  {
+   "fieldname": "demand_deviation",
+   "fieldtype": "Data",
+   "label": "Demand deviation"
+  },
+  {
+   "fieldname": "lead_time",
+   "fieldtype": "Duration",
+   "label": "Lead time"
+  },
+  {
+   "fieldname": "lead_time_deviation",
+   "fieldtype": "Duration",
+   "label": "Lead time deviation"
+  },
+  {
+   "fieldname": "safety_stock_minimum_quantity",
+   "fieldtype": "Data",
+   "label": "Safety stock minimum quantity"
+  },
+  {
+   "fieldname": "safety_stock_maximum_quantity",
+   "fieldtype": "Data",
+   "label": "Safety stock maximum quantity"
+  },
+  {
+   "fieldname": "safety_stock_minimum_period_of_cover",
+   "fieldtype": "Duration",
+   "label": "Safety stock minimum period of cover"
+  },
+  {
+   "fieldname": "safety_stock_maximum_period_of_cover",
+   "fieldtype": "Duration",
+   "label": "Safety stock maximum period of cover"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "label": "ID"
+  },
+  {
+   "fieldname": "column_break_bifp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_xapd",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-16 17:00:23.741515",
+ "modified_by": "Administrator",
+ "module": "Frepple",
+ "name": "Frepple Inventory Policies",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

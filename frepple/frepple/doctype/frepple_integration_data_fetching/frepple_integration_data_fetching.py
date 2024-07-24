@@ -54,9 +54,9 @@ def fetch_data(doc):
 	if doc["frepple_supplier"]:
 		fetch_suppliers()
 		import_datas.append("Frepple Supplier")
-	if doc["frepple_item_supplier"]:
-		fetch_item_suppliers()
-		import_datas.append("Frepple Item Supplier")
+	# if doc["frepple_item_supplier"]:
+	# 	fetch_item_suppliers()
+	# 	import_datas.append("Frepple Item Supplier")
 	
 	# Manufacturing
 	if doc["frepple_operation"]:
@@ -93,7 +93,7 @@ def fetch_items():
 			new_item.insert()
 		else:#Update 
 			frappe.db.set_value('Frepple Item', item.item_code, {
-				'cost':item.valuation_rate,
+				'valuation_rate':item.valuation_rate,
 			}) 
 
 def fetch_customers():
@@ -230,125 +230,196 @@ def fetch_suppliers():
 # 			new_supplier.insert()
 
 
-def fetch_operations():
-	locations = frappe.db.sql(
-		"""
-		SELECT name FROM `tabFrepple Location`
-		WHERE name LIKE 'Work In Progress%%'
-		""",
-		as_dict=1)
-	BOMs = frappe.db.sql(
-		"""
-		SELECT bom.name,bom.item, bom.is_active, bom.is_default, bomop.operation, bomop.workstation,bomop.idx, bomop.time_in_mins,bomit.item_code 
-		FROM `tabBOM` bom, `tabBOM Operation` bomop,`tabBOM Item` bomit
-		WHERE bom.is_active = 1 and bom.is_default and bom.name = bomop.parent and bom.name = bomit.parent
-		""",
-		as_dict=1)
+# def fetch_operations():
+# 	locations = frappe.db.sql(
+# 		"""
+# 		SELECT name FROM `tabFrepple Location`
+# 		WHERE name LIKE 'Work In Progress%%'
+# 		""",
+# 		as_dict=1)
+# 	BOMs = frappe.db.sql(
+# 		"""
+# 		SELECT bom.name,bom.item, bom.is_active, bom.is_default, bomop.operation, bomop.workstation,bomop.idx, bomop.time_in_mins,bomit.item_code 
+# 		FROM `tabBOM` bom, `tabBOM Operation` bomop,`tabBOM Item` bomit
+# 		WHERE bom.is_active = 1 and bom.is_default and bom.name = bomop.parent and bom.name = bomit.parent
+# 		""",
+# 		as_dict=1)
 	
-	for BOM in BOMs:
-		if not frappe.db.exists("Frepple Operation",BOM.name): 
-			# FOR routing type operation : BOM
-			print(BOM)
-			new_operation = frappe.new_doc("Frepple Operation")
-			new_operation.operation = BOM.name
-			new_operation.location = locations[0].name
-			new_operation.type = "routing"
-			new_operation.item = BOM.item
-			new_operation.duration = time(0,0,0)
-			new_operation.priority = 1
-			new_operation.insert()
+# 	for BOM in BOMs:
+# 		if not frappe.db.exists("Frepple Operation",BOM.name): 
+# 			# FOR routing type operation : BOM
+# 			print(BOM)
+# 			new_operation = frappe.new_doc("Frepple Operation")
+# 			new_operation.operation = BOM.name
+# 			new_operation.location = locations[0].name
+# 			new_operation.type = "routing"
+# 			new_operation.item = BOM.item
+# 			new_operation.duration = 0
+# 			new_operation.priority = 1
+# 			new_operation.insert()
 		
 
-		if not frappe.db.exists("Frepple Operation",BOM.operation+"@"+BOM.name):
-			# For time per type operation : Operation in the BOM
-			new_operation = frappe.new_doc("Frepple Operation")
-			new_operation.operation = BOM.operation+"@"+BOM.name
-			new_operation.location = locations[0].name
-			new_operation.type = "time_per"
-			new_operation.operation_owner = BOM.name
-			new_operation.duration = time(0,0,0)
-			new_operation.duration_per_unit=add_to_date(datetime(1900,1,1,0,0,0),minutes=(BOM.time_in_mins),as_datetime=True).time() #get only the time
-			new_operation.priority = BOM.idx
-			new_operation.insert()
-		else:
-			frappe.db.set_value('Frepple Operation', BOM.operation+"@"+BOM.name, {
-				'duration_per_unit':add_to_date(datetime(1900,1,1,0,0,0),minutes=(BOM.time_in_mins),as_datetime=True).time() #get only the time,
-			}) 
+# 		if not frappe.db.exists("Frepple Operation",BOM.operation+"@"+BOM.name):
+# 			# For time per type operation : Operation in the BOM
+# 			new_operation = frappe.new_doc("Frepple Operation")
+# 			new_operation.operation = BOM.operation+"@"+BOM.name
+# 			new_operation.location = locations[0].name
+# 			new_operation.type = "time_per"
+# 			new_operation.operation_owner = BOM.name
+# 			new_operation.duration = 0
+# 			new_operation.duration_per_unit=0 #get only the time
+# 			new_operation.priority = BOM.idx
+# 			new_operation.insert()
+# 		else:
+# 			continue
+# 			frappe.db.set_value('Frepple Operation', BOM.operation+"@"+BOM.name, {
+# 				'duration_per_unit':add_to_date(datetime(1900,1,1,0,0,0),minutes=(BOM.time_in_mins),as_datetime=True).time() #get only the time,
+# 			}) 
 
 
+def fetch_operations():
+		operation = frappe.db.sql("""
+		Select * from `tabOperation`
+		""",as_dict=True)		
+		for op in operation:
+			print(type(op.duration) ,op.duration,type(op.duration_per),op.duration_per)
+			if not frappe.db.exists("Frepple Operation", {'operation':op.name,"item":op.item}):
+				new_operation = frappe.new_doc("Frepple Operation")
+				new_operation.operation = op.name
+				new_operation.location = op.location
+				#new_operation.type = op.type
+				new_operation.operation_owner = op.name
+				new_operation.duration = op.duration
+				new_operation.duration_per_unit= op.duration_per
+				new_operation.priority = op.priority
+				new_operation.item = op.item
+				new_operation.insert()
+			else:
+				continue
+				frappe.db.set_value('Frepple Operation', BOM.operation+"@"+BOM.name, {
+					'duration_per_unit':add_to_date(datetime(1900,1,1,0,0,0),minutes=(BOM.time_in_mins),as_datetime=True).time() #get only the time,
+				}) 
 
-def fetch_operation_materials():
-	BOMs = frappe.db.sql(
-		"""
-		SELECT bom.name, bom.item,bom.quantity, bom.transfer_material_against, bom.is_active, bom.is_default,bomop.operation,bomit.item_code,bomit.qty 
-		FROM `tabBOM` bom, `tabBOM Operation` bomop,`tabBOM Item` bomit
-		WHERE bom.is_active = 1 and bom.is_default=1 and bom.name = bomop.parent and bom.name = bomit.parent
-		""",
-	as_dict=1)
+# def fetch_operation_materials():
+# 	BOMs = frappe.db.sql(
+# 		"""
+# 		SELECT bom.name, bom.item,bom.quantity, bom.transfer_material_against, bom.is_active, bom.is_default,bomop.operation,bomit.item_code,bomit.qty 
+# 		FROM `tabBOM` bom, `tabBOM Operation` bomop,`tabBOM Item` bomit
+# 		WHERE bom.is_active = 1 and bom.is_default=1 and bom.name = bomop.parent and bom.name = bomit.parent
+# 		""",
+# 	as_dict=1)
 
-	for BOM in BOMs:
-		print(BOM.name)
-		frepple_operations = frappe.db.sql(
-			"""
-			SELECT name,type,operation_owner
-			FROM `tabFrepple Operation`
-			WHERE type = "time_per" and operation_owner = %s
-			""",
-		BOM.name,as_dict=1)
-		print(frepple_operations[0].name)
-		if (BOM.transfer_material_against == "Work Order"): #let the first operation consumed raw material and produce product
-			# for item in BOM.item_code:
-			# For product which is being produced
-			if not frappe.db.exists("Frepple Operation Material",BOM.item+"-"+frepple_operations[0].name):
-				new_operation_material = frappe.new_doc("Frepple Operation Material")
-				new_operation_material.operation = frepple_operations[0].name
-				new_operation_material.item = BOM.item
-				new_operation_material.type = "end"
-				new_operation_material.quantity = BOM.quantity
-				new_operation_material.insert()
+# 	for BOM in BOMs:
+# 		print(BOM.name)
+# 		frepple_operations = frappe.db.sql(
+# 			"""
+# 			SELECT name,type,operation_owner
+# 			FROM `tabFrepple Operation`
+# 			WHERE type = "time_per" and operation_owner = %s
+# 			""",
+# 		BOM.name,as_dict=1)
+# 		print(frepple_operations[0].name)
+# 		if (BOM.transfer_material_against == "Work Order"): #let the first operation consumed raw material and produce product
+# 			# for item in BOM.item_code:
+# 			# For product which is being produced
+# 			if not frappe.db.exists("Frepple Operation Material",BOM.item+"-"+frepple_operations[0].name):
+# 				new_operation_material = frappe.new_doc("Frepple Operation Material")
+# 				new_operation_material.operation = frepple_operations[0].name
+# 				new_operation_material.item = BOM.item
+# 				new_operation_material.type = "end"
+# 				new_operation_material.quantity = BOM.quantity
+				
+# 				new_operation_material.insert()
 
-			# For raw materials which is being consumed
-			if not frappe.db.exists("Frepple Operation Material",BOM.item_code+"-"+frepple_operations[0].name):
-				new_operation_material = frappe.new_doc("Frepple Operation Material")
-				new_operation_material.operation = frepple_operations[0].name
-				new_operation_material.item = BOM.item_code
-				new_operation_material.type = "start"
-				new_operation_material.quantity = BOM.qty * -1 #consumed item need to be negative
-				new_operation_material.insert()
+# 			# For raw materials which is being consumed
+# 			if not frappe.db.exists("Frepple Operation Material",BOM.item_code+"-"+frepple_operations[0].name):
+# 				new_operation_material = frappe.new_doc("Frepple Operation Material")
+# 				new_operation_material.operation = frepple_operations[0].name
+# 				new_operation_material.item = BOM.item_code
+# 				new_operation_material.type = "start"
+# 				new_operation_material.quantity = BOM.qty * -1 #consumed item need to be negative
+# 				new_operation_material.insert()
 
 
-	''' NOT YET CONSIDER the case if material transfer type is "JOB card" where each operation got their own type'''
-		# if (BOM.transfer_material_against == "Job Card"): #assign material to the correspond operation
+# 	''' NOT YET CONSIDER the case if material transfer type is "JOB card" where each operation got their own type'''
+# 		# if (BOM.transfer_material_against == "Job Card"): #assign material to the correspond operation
 
-		# if not frappe.db.exists("Frepple Operation",BOM.operation+"@"+BOM.name):
-		# 	new_operation = frappe.new_doc("Frepple Operation")
-		# 	new_operation.operation = BOM.operation+"@"+BOM.name
-		# 	new_operation.location = locations[0].name
-		# 	new_operation.type = "time_per"
-		# 	new_operation.operation_owner = BOM.name
-		# 	new_operation.duration = time(0,0,0)
-		# 	new_operation.duration_per_unit=add_to_date(datetime(1900,1,1,0,0,0),minutes=(BOM.time_in_mins),as_datetime=True).time() #get only the time
-		# 	new_operation.insert()
+# 		# if not frappe.db.exists("Frepple Operation",BOM.operation+"@"+BOM.name):
+# 		# 	new_operation = frappe.new_doc("Frepple Operation")
+# 		# 	new_operation.operation = BOM.operation+"@"+BOM.name
+# 		# 	new_operation.location = locations[0].name
+# 		# 	new_operation.type = "time_per"
+# 		# 	new_operation.operation_owner = BOM.name
+# 		# 	new_operation.duration = time(0,0,0)
+# 		# 	new_operation.duration_per_unit=add_to_date(datetime(1900,1,1,0,0,0),minutes=(BOM.time_in_mins),as_datetime=True).time() #get only the time
+# 		# 	new_operation.insert()
 
+
+# def fetch_operation_resources():
+# 	BOMs = frappe.db.sql(
+# 		"""
+# 		SELECT bom.name, bom.is_active, bom.is_default, bomop.operation, bomop.workstation 
+# 		FROM `tabBOM` bom, `tabBOM Operation` bomop
+# 		WHERE bom.is_active = 1 and bom.is_default=1 and bomop.parent = bom.name
+# 		""",
+# 	as_dict=1)
+
+
+# 	for BOM in BOMs:
+# 		if not frappe.db.exists("Frepple Operation Resource",BOM.workstation+"-"+BOM.operation+"@"+BOM.name):
+# 			new_doc = frappe.new_doc("Frepple Operation Resource")
+# 			new_doc.operation = BOM.operation+"@"+BOM.name
+# 			new_doc.resource = BOM.workstation
+# 			if frappe.db.exists("Frepple Resource",BOM.workstation) and frappe.db.exists("Frepple Operation",BOM.operation+"@"+BOM.name):
+# 				new_doc.insert()
 
 def fetch_operation_resources():
-	BOMs = frappe.db.sql(
-		"""
-		SELECT bom.name, bom.is_active, bom.is_default, bomop.operation, bomop.workstation 
-		FROM `tabBOM` bom, `tabBOM Operation` bomop
-		WHERE bom.is_active = 1 and bom.is_default=1 and bomop.parent = bom.name
-		""",
-	as_dict=1)
+	boms = frappe.db.get_all('BOM',pluck='name')
+	for bom_op in boms:
+		bom_op_rec = frappe.db.get_all('BOM Operation',filters={'parent':bom_op},fields=['*'])
+		print(len(bom_op_rec))
+		for rec in bom_op_rec:
+			print(f"{rec.operation}-{rec.workstation}","$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+			if not frappe.db.exists('Frepple Operation Resource',{'name':f"{rec.workstation}-{rec.operation}"}):
+				print("#######################")
+				op_rec_doc = frappe.new_doc('Frepple Operation Resource')
+				op_rec_doc.operation = rec.operation
+				op_rec_doc.resource = rec.workstation
+				op_rec_doc.or_owner = rec.parent
+				op_rec_doc.save()
+			else:
+				continue
 
 
-	for BOM in BOMs:
-		if not frappe.db.exists("Frepple Operation Resource",BOM.workstation+"-"+BOM.operation+"@"+BOM.name):
-			new_doc = frappe.new_doc("Frepple Operation Resource")
-			new_doc.operation = BOM.operation+"@"+BOM.name
-			new_doc.resource = BOM.workstation
-			if frappe.db.exists("Frepple Resource",BOM.workstation) and frappe.db.exists("Frepple Operation",BOM.operation+"@"+BOM.name):
-				new_doc.insert()
+	# for BOM in BOMs:
+	# 	if not frappe.db.exists("Frepple Operation Resource",BOM.workstation+"-"+BOM.operation+"@"+BOM.name):
+	# 		new_doc = frappe.new_doc("Frepple Operation Resource")
+	# 		new_doc.operation = BOM.operation+"@"+BOM.name
+	# 		new_doc.resource = BOM.workstation
+	# 		if frappe.db.exists("Frepple Resource",BOM.workstation) and frappe.db.exists("Frepple Operation",BOM.operation+"@"+BOM.name):
+	# 			new_doc.insert()
 
+def fetch_operation_materials():
+	boms = frappe.db.get_all('BOM',pluck='name')
+	for bom_op in boms:
+		bom_items = frappe.db.get_all('BOM Explosion Item',filters={'parent':bom_op},fields=['*'])
+		for rec in bom_items:
+			if not frappe.db.exists('Frepple Operation Material',{'item':rec.item_code}):
+				op_rec_doc = frappe.new_doc('Frepple Operation Material')
+				op_rec_doc.operation = rec.operation
+				op_rec_doc.item = rec.item_code
+				op_rec_doc.type = 'start'
+				op_rec_doc.quantity = -rec.qty_consumed_per_unit
+				op_rec_doc.save()
+			else:
+				continue
+		doc = frappe.get_doc('BOM',bom_op)
+		bom_op_record = frappe.new_doc('Frepple Operation Material')
+		bom_op_record.item = doc.item
+		bom_op_record.quantity = doc.quantity + 1
+		bom_op_record.operation = doc.custom_operation_to_manufacture
+		bom_op_record.type = 'end'
+		bom_op_record.save()
 
 def fetch_sales_orders():
 	sales_orders = frappe.db.sql(

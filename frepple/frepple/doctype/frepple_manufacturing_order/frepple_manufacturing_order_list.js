@@ -1,6 +1,6 @@
 frappe.listview_settings['Frepple Manufacturing Order'] = {
     onload(listview) {
-        // triggers once before the list is loaded
+       
         console.log("loaded", listview);
         listview.page.add_action_item('Create work order in ERPNext', 
             () => 

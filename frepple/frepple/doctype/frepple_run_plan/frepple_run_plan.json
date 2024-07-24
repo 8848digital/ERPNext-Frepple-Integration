@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "creation": "2022-01-28 12:54:51.248266",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -13,6 +14,30 @@
   "capacity",
   "lead_time",
   "release_fence",
+  "section_break_duiw",
+  "import_mo",
+  "column_break_d8ze",
+  "import_po",
+  "section_break_geir",
+  "import_item_supplier",
+  "column_break_i2qo",
+  "import_item_distribution",
+  "section_break_6rco",
+  "import_operation_resource",
+  "column_break_x4ns",
+  "import_operation_material",
+  "section_break_bcqt",
+  "import_distribution_order",
+  "column_break_gamg",
+  "import_demand",
+  "section_break_dese",
+  "import_inv_detail",
+  "column_break_kod1",
+  "import_inventory_policy",
+  "section_break_hqe7",
+  "import_op_dependency",
+  "column_break_ufv7",
+  "import_sub_operation",
   "section_break_9",
   "run_plan",
   "update_frepple",
@@ -96,10 +121,131 @@
    "fieldname": "update_frepple",
    "fieldtype": "Check",
    "label": "Update demand, manufacturing order and purchase order on frepple side"
+  },
+  {
+   "fieldname": "section_break_duiw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_mo",
+   "fieldtype": "Check",
+   "label": "Import Manufacturing Order"
+  },
+  {
+   "fieldname": "column_break_d8ze",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_po",
+   "fieldtype": "Check",
+   "label": "Import Purchase Order"
+  },
+  {
+   "fieldname": "section_break_geir",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_item_supplier",
+   "fieldtype": "Check",
+   "label": "Import Item Supplier"
+  },
+  {
+   "fieldname": "column_break_i2qo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_item_distribution",
+   "fieldtype": "Check",
+   "label": "Import Item Distribution"
+  },
+  {
+   "fieldname": "section_break_6rco",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_operation_resource",
+   "fieldtype": "Check",
+   "label": "Import Operation Resource"
+  },
+  {
+   "fieldname": "column_break_x4ns",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_operation_material",
+   "fieldtype": "Check",
+   "label": "Import Operation Material"
+  },
+  {
+   "fieldname": "section_break_bcqt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_distribution_order",
+   "fieldtype": "Check",
+   "label": "Import Distribution Order"
+  },
+  {
+   "fieldname": "column_break_gamg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_demand",
+   "fieldtype": "Check",
+   "label": "Import Demand"
+  },
+  {
+   "fieldname": "section_break_dese",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_inv_detail",
+   "fieldtype": "Check",
+   "label": "Import Inventory Detail"
+  },
+  {
+   "fieldname": "column_break_kod1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_inventory_policy",
+   "fieldtype": "Check",
+   "label": "Import Inventory Policy"
+  },
+  {
+   "fieldname": "section_break_hqe7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_op_dependency",
+   "fieldtype": "Check",
+   "label": "Import Operatation Dependency"
+  },
+  {
+   "fieldname": "column_break_ufv7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "import_sub_operation",
+   "fieldtype": "Check",
+   "label": "Import Sub Operation"
   }
  ],
  "issingle": 1,
- "modified": "2022-02-09 15:24:45.994127",
+ "links": [],
+ "modified": "2024-07-18 10:41:22.357576",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Run Plan",
@@ -118,5 +264,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

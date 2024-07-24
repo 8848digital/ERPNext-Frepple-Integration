@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "allow_events_in_timeline": 1,
  "allow_import": 1,
  "allow_rename": 1,
@@ -12,7 +13,8 @@
   "basic_info",
   "customer",
   "customer_group",
-  "customer_type"
+  "customer_type",
+  "subcategory"
  ],
  "fields": [
   {
@@ -44,14 +46,19 @@
    "fieldtype": "Select",
    "label": "Category",
    "options": "Company\nIndividual"
+  },
+  {
+   "fieldname": "subcategory",
+   "fieldtype": "Data",
+   "label": "Subcategory"
   }
  ],
  "icon": "fa fa-user",
- "modified": "2022-01-26 17:58:01.108912",
+ "links": [],
+ "modified": "2024-07-17 15:42:39.993050",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Customer",
- "name_case": "Title Case",
  "owner": "Administrator",
  "permissions": [
   {
@@ -70,5 +77,6 @@
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "ASC",
+ "states": [],
  "track_changes": 1
 }

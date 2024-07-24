@@ -1,0 +1,146 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-07-12 13:26:09.953528",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "item",
+  "location",
+  "customer",
+  "forecast_method",
+  "section_break_yhvy",
+  "planned",
+  "column_break_hcq7",
+  "discrete",
+  "category_details_section",
+  "description",
+  "category",
+  "column_break_sezj",
+  "subcategory",
+  "priority",
+  "operation_details_section",
+  "minimum_shipment",
+  "maximum_lateness",
+  "delivery_operation"
+ ],
+ "fields": [
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Frepple Item"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "label": "Location",
+   "options": "Frepple Location"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Frepple Customer"
+  },
+  {
+   "fieldname": "forecast_method",
+   "fieldtype": "Select",
+   "label": "Forecast method",
+   "options": "Automatic\nConstant\nTrend\nSeasonal\nIntermittent"
+  },
+  {
+   "default": "0",
+   "fieldname": "planned",
+   "fieldtype": "Check",
+   "label": "Planned"
+  },
+  {
+   "fieldname": "column_break_hcq7",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "discrete",
+   "fieldtype": "Check",
+   "label": "Discrete"
+  },
+  {
+   "fieldname": "category_details_section",
+   "fieldtype": "Section Break",
+   "label": "Category Details"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "label": "Category"
+  },
+  {
+   "fieldname": "subcategory",
+   "fieldtype": "Data",
+   "label": "Subcategory"
+  },
+  {
+   "fieldname": "column_break_sezj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Data",
+   "label": "Priority"
+  },
+  {
+   "fieldname": "operation_details_section",
+   "fieldtype": "Section Break",
+   "label": "Operation Details"
+  },
+  {
+   "fieldname": "minimum_shipment",
+   "fieldtype": "Data",
+   "label": "Minimum shipment"
+  },
+  {
+   "fieldname": "maximum_lateness",
+   "fieldtype": "Data",
+   "label": "Maximum lateness"
+  },
+  {
+   "fieldname": "delivery_operation",
+   "fieldtype": "Data",
+   "label": "Delivery operation"
+  },
+  {
+   "fieldname": "section_break_yhvy",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-12 13:36:32.502661",
+ "modified_by": "Administrator",
+ "module": "Frepple",
+ "name": "Frepple Forecast",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

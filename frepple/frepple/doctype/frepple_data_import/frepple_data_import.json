@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-07-10 14:30:37.777704",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "frepple_item",
+  "get_data_from_frepple"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "frepple_item",
+   "fieldtype": "Check",
+   "label": "Frepple Item"
+  },
+  {
+   "fieldname": "get_data_from_frepple",
+   "fieldtype": "Button",
+   "label": "Get Data From Frepple"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-07-10 14:31:12.646176",
+ "modified_by": "Administrator",
+ "module": "Frepple",
+ "name": "Frepple Data Import",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

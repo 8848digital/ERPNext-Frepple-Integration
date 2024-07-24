@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "format:{item}@{origin}-{destination}",
  "creation": "2022-01-26 13:24:51.311280",
  "doctype": "DocType",
@@ -9,6 +10,7 @@
   "origin",
   "destination",
   "lead_time_section",
+  "leadtime",
   "day",
   "column_break_6",
   "time",
@@ -115,9 +117,15 @@
    "fieldname": "resource_quantity",
    "fieldtype": "Int",
    "label": "Resource Quantity"
+  },
+  {
+   "fieldname": "leadtime",
+   "fieldtype": "Duration",
+   "label": "Lead Time"
   }
  ],
- "modified": "2022-01-26 17:08:22.174521",
+ "links": [],
+ "modified": "2024-07-17 15:46:00.425587",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Item Distribution",
@@ -138,5 +146,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

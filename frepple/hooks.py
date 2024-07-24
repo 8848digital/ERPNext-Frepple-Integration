@@ -93,6 +93,9 @@ doctype_js = {
     'Sales Order':'public/js/sales_order.js',
     'Bin':'public/js/bin.js',
 }
+after_migrate = "frepple.migrate.after_migrate"
+after_uninstall = "frepple.uninstall.after_uninstall"
+
 # Scheduled Tasks
 # ---------------
 

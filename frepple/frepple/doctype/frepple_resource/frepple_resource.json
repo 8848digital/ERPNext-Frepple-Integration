@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "field:name1",
  "creation": "2022-01-26 13:05:36.720757",
  "doctype": "DocType",
@@ -18,7 +19,11 @@
   "maximum",
   "description",
   "resource_owner",
-  "name1"
+  "name1",
+  "category",
+  "subcategory",
+  "cost",
+  "efficiency"
  ],
  "fields": [
   {
@@ -115,9 +120,30 @@
    "in_list_view": 1,
    "label": "Available",
    "options": "Frepple Calendar"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "label": "Category"
+  },
+  {
+   "fieldname": "subcategory",
+   "fieldtype": "Data",
+   "label": "Subcategory"
+  },
+  {
+   "fieldname": "cost",
+   "fieldtype": "Float",
+   "label": "Cost"
+  },
+  {
+   "fieldname": "efficiency",
+   "fieldtype": "Percent",
+   "label": "Efficiency"
   }
  ],
- "modified": "2022-02-11 11:12:06.433322",
+ "links": [],
+ "modified": "2024-07-17 16:28:55.482378",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Resource",
@@ -138,5 +164,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }
