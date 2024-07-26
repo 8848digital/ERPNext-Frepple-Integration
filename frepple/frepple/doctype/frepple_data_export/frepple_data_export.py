@@ -496,15 +496,16 @@ def export_operations():
 		SELECT operation, item, size_multiple,size_maximum
 		size_minimum,Date(effective_end) as "effective_end",
 		Date(effective_start) as "effective_start",search_mode,
-		location, type, priority,per_unit_duration as "duration_per_unit",duration,operation_owner
+		location, type, priority,per_unit_duration as "duration_per_unit",custom_duration as "duration",operation_owner
 		FROM `tabFrepple Operation`
 		WHERE type = "routing"
 		""",
 		as_dict=1)
 #timestamp(duration_per_unit) as "duration_per_unit", timestamp(duration) as "duration"
-	print(routing_operations)
+	print(routing_operations,"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
 	for operation in routing_operations:
 		print(operation)
+		search_mode =None
 		if operation.search_mode == 'priority':
 			search_mode="PRIORITY" 
 		elif operation.search_mode == 'minimum cost':
@@ -513,10 +514,16 @@ def export_operations():
 			search_mode="MINPENALTY" 
 		elif operation.search_mode =="minimum cost plus penalty":
 			search_mode="MINCOSTPENALTY"
-		if operation.search_mode:
+		
+		if operation.duration:
 			duration = operation.duration
 		else:
-			duration = None
+			duration = 0
+		if operation.duration_per_unit:
+			duration_per_unit = operation.duration_per_unit
+		else:
+			duration_per_unit = 0
+
 		if operation.effective_start:
 			start_date=str(operation.effective_start)
 		else:
@@ -533,7 +540,7 @@ def export_operations():
 			"priority":operation.priority,
 			# "duration_per":(datetime(1900,1,1,0,0,0)+ operation.duration_per_unit).time(), 
 			"duration":add_seconds_to_time(duration),
-			#"duration_per":add_seconds_to_time(operation.duration_per_unit),
+			"duration_per":add_seconds_to_time(duration_per_unit),
 			"sizeminimum":operation.size_minimum,
 			"sizemultiple":operation.size_multiple,
 			"sizemaximum":operation.size_maximum,

@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "autoname": "field:operation",
  "creation": "2022-01-26 13:32:10.080554",
  "doctype": "DocType",
@@ -10,9 +11,14 @@
   "location",
   "type",
   "priority",
-  "duration_per_unit",
-  "duration",
-  "operation_owner"
+  "operation_owner",
+  "additional_information_tab",
+  "size_multiple",
+  "size_maximum",
+  "size_minimum",
+  "effective_end",
+  "effective_start",
+  "search_mode"
  ],
  "fields": [
   {
@@ -47,19 +53,6 @@
    "options": "fixed_time\nrouting\ntime_per\nalternate\nsplit"
   },
   {
-   "default": "00:00:00",
-   "depends_on": "eval:(doc.type==\"time_per\")",
-   "fieldname": "duration_per_unit",
-   "fieldtype": "Time",
-   "label": "Duration per unit"
-  },
-  {
-   "default": "00:00:00",
-   "fieldname": "duration",
-   "fieldtype": "Time",
-   "label": "Duration"
-  },
-  {
    "description": "BOM of the operations. Owner should be a operation with \"routing type\"",
    "fieldname": "operation_owner",
    "fieldtype": "Data",
@@ -72,9 +65,46 @@
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Priority"
+  },
+  {
+   "fieldname": "additional_information_tab",
+   "fieldtype": "Tab Break",
+   "label": "Additional Information"
+  },
+  {
+   "fieldname": "size_multiple",
+   "fieldtype": "Data",
+   "label": "Multiple Size"
+  },
+  {
+   "fieldname": "size_maximum",
+   "fieldtype": "Data",
+   "label": "Maximum Size"
+  },
+  {
+   "fieldname": "size_minimum",
+   "fieldtype": "Data",
+   "label": "Minimum Size"
+  },
+  {
+   "fieldname": "effective_end",
+   "fieldtype": "Date",
+   "label": "Effective Start Time"
+  },
+  {
+   "fieldname": "effective_start",
+   "fieldtype": "Date",
+   "label": "Effective End Time"
+  },
+  {
+   "fieldname": "search_mode",
+   "fieldtype": "Select",
+   "label": "Search Mode",
+   "options": "priority\nminimum cost\nminimum penalty\nminimum cost plus penalty"
   }
  ],
- "modified": "2022-01-31 14:32:27.010210",
+ "links": [],
+ "modified": "2024-07-26 16:12:26.918133",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Operation",
@@ -95,5 +125,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

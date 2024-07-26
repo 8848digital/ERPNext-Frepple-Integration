@@ -1,0 +1,20 @@
+{
+    "Frepple Operation": [
+      
+        {
+            "fieldname": "custom_duration",
+            "label": "Duration",
+            "fieldtype": "Duration",
+            "module": "Frepple",
+            "insert_after":"location"
+        },
+        {
+            "fieldname": "per_unit_duration",
+            "label": "Duration Per Unit",
+            "fieldtype": "Duration",
+            "module": "Frepple",
+            "insert_after":"duration"
+        }
+
+    ]
+}

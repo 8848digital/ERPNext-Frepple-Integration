@@ -377,11 +377,9 @@ def fetch_operation_resources():
 	boms = frappe.db.get_all('BOM',pluck='name')
 	for bom_op in boms:
 		bom_op_rec = frappe.db.get_all('BOM Operation',filters={'parent':bom_op},fields=['*'])
-		print(len(bom_op_rec))
 		for rec in bom_op_rec:
 			print(f"{rec.operation}-{rec.workstation}","$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 			if not frappe.db.exists('Frepple Operation Resource',{'name':f"{rec.workstation}-{rec.operation}"}):
-				print("#######################")
 				op_rec_doc = frappe.new_doc('Frepple Operation Resource')
 				op_rec_doc.operation = rec.operation
 				op_rec_doc.resource = rec.workstation
@@ -416,7 +414,7 @@ def fetch_operation_materials():
 		doc = frappe.get_doc('BOM',bom_op)
 		bom_op_record = frappe.new_doc('Frepple Operation Material')
 		bom_op_record.item = doc.item
-		bom_op_record.quantity = doc.quantity + 1
+		bom_op_record.quantity = doc.quantity
 		bom_op_record.operation = doc.custom_operation_to_manufacture
 		bom_op_record.type = 'end'
 		bom_op_record.save()

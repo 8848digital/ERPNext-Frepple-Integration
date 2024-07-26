@@ -1,0 +1,13 @@
+{
+    "BOM": [
+      
+        {
+        "fieldname": "custom_operation_to_manufacture",
+        "label": "Operation to Manufacture",
+        "fieldtype": "Link",
+        "options":"Operation",
+        "module": "Frepple",
+        "insert_after": "item"
+        }
+    ]
+}
