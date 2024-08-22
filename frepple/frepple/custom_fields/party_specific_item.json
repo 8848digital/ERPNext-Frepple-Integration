@@ -1,0 +1,18 @@
+{
+    "Party Specific Item":[
+        {
+            "fieldname": "sec_break_1",
+            "label": "Lead Time Details",
+            "fieldtype": "Section Break",
+            "module": "Frepple",
+            "insert_after":"based_on_value"
+        },
+        {
+            "fieldname": "leadtime",
+            "label": "leadtime",
+            "fieldtype": "Duration",
+            "module": "Frepple",
+            "insert_after":"sec_break_1"
+        }
+]
+}

@@ -54,9 +54,10 @@ def fetch_data(doc):
 	if doc["frepple_supplier"]:
 		fetch_suppliers()
 		import_datas.append("Frepple Supplier")
-	# if doc["frepple_item_supplier"]:
-	# 	fetch_item_suppliers()
-	# 	import_datas.append("Frepple Item Supplier")
+	
+	if doc["frepple_item_supplier"]:
+		fetch_item_suppliers()
+		import_datas.append("Frepple Item Supplier")
 	
 	# Manufacturing
 	if doc["frepple_operation"]:
@@ -282,13 +283,22 @@ def fetch_operations():
 		Select * from `tabOperation`
 		""",as_dict=True)		
 		for op in operation:
-			print(type(op.duration) ,op.duration,type(op.duration_per),op.duration_per)
+			bom_rec = frappe.db.get_all('BOM Operation',filters={'operation':op.name},pluck='parent')
+			if bom_rec:
+				parent_operation = frappe.db.get_value('BOM',{'name':bom_rec[0]},'custom_operation_to_manufacture')
+			else:
+				parent_operation = None
+			if op.type == 'Fixed Time':
+				type = 'time_per'
+			elif op.type == 'Routing':
+				type = 'routing'
+		
 			if not frappe.db.exists("Frepple Operation", {'operation':op.name,"item":op.item}):
 				new_operation = frappe.new_doc("Frepple Operation")
 				new_operation.operation = op.name
 				new_operation.location = op.location
-				#new_operation.type = op.type
-				new_operation.operation_owner = op.name
+				new_operation.type = type
+				# new_operation.operation_owner = parent_operation
 				new_operation.duration = op.duration
 				new_operation.duration_per_unit= op.duration_per
 				new_operation.priority = op.priority
@@ -378,7 +388,6 @@ def fetch_operation_resources():
 	for bom_op in boms:
 		bom_op_rec = frappe.db.get_all('BOM Operation',filters={'parent':bom_op},fields=['*'])
 		for rec in bom_op_rec:
-			print(f"{rec.operation}-{rec.workstation}","$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 			if not frappe.db.exists('Frepple Operation Resource',{'name':f"{rec.workstation}-{rec.operation}"}):
 				op_rec_doc = frappe.new_doc('Frepple Operation Resource')
 				op_rec_doc.operation = rec.operation
@@ -401,23 +410,25 @@ def fetch_operation_materials():
 	boms = frappe.db.get_all('BOM',pluck='name')
 	for bom_op in boms:
 		bom_items = frappe.db.get_all('BOM Explosion Item',filters={'parent':bom_op},fields=['*'])
+		doc = frappe.get_doc('BOM',bom_op)
 		for rec in bom_items:
 			if not frappe.db.exists('Frepple Operation Material',{'item':rec.item_code}):
 				op_rec_doc = frappe.new_doc('Frepple Operation Material')
-				op_rec_doc.operation = rec.operation
+				op_rec_doc.operation = doc.custom_operation_to_manufacture
 				op_rec_doc.item = rec.item_code
 				op_rec_doc.type = 'start'
 				op_rec_doc.quantity = -rec.qty_consumed_per_unit
 				op_rec_doc.save()
 			else:
 				continue
-		doc = frappe.get_doc('BOM',bom_op)
-		bom_op_record = frappe.new_doc('Frepple Operation Material')
-		bom_op_record.item = doc.item
-		bom_op_record.quantity = doc.quantity
-		bom_op_record.operation = doc.custom_operation_to_manufacture
-		bom_op_record.type = 'end'
-		bom_op_record.save()
+		
+		if not frappe.db.exists('Frepple Operation Material',{'item':doc.item}):
+			bom_op_record = frappe.new_doc('Frepple Operation Material')
+			bom_op_record.item = doc.item
+			bom_op_record.quantity = doc.quantity
+			bom_op_record.operation = doc.custom_operation_to_manufacture
+			bom_op_record.type = 'end'
+			bom_op_record.save()
 
 def fetch_sales_orders():
 	sales_orders = frappe.db.sql(
@@ -470,6 +481,19 @@ def fetch_sales_orders():
 					'status':status
 				}) 
 
+
+def fetch_item_suppliers():
+	fetch_suppliers()
+	fetch_items()
+	party_specific_doc = frappe.get_all('Party Specific Item',pluck="name")
+	for record in party_specific_doc:
+		doc = frappe.get_doc('Party Specific Item',record)
+		if not  frappe.db.exists('Frepple Item Supplier',{'supplier':doc.party,'item':doc.based_on_value}):
+			new_item_supplier = frappe.new_doc("Frepple Item Supplier")
+			new_item_supplier.supplier = doc.party
+			new_item_supplier.item = doc.based_on_value
+			new_item_supplier.save()
+			
 # CHeck the erpnext sales order status and get its correspond frepple demand status
 # ERPnext to frepple
 def so_status_e2f(status):

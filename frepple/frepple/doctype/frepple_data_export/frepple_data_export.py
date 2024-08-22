@@ -249,7 +249,7 @@ def export_customers():
 	api = "customer"
 	url,headers = get_frepple_params(api=api,filter=None)
 
-	customers = frappe.db.sql("""SELECT name, customer_group, customer_type,category,subcategory FROM `tabFrepple Customer`""",as_dict=1)
+	customers = frappe.db.sql("""SELECT name, customer_group, customer_type,subcategory FROM `tabFrepple Customer`""",as_dict=1)
 	for customer in customers:
 		'''Add the customer_group to frepple to use it as the owner to ensure no request error happen'''
 		data = json.dumps({
@@ -465,9 +465,18 @@ def export_item_suppliers():
 		# 	time = str(item_supplier.time.time())
 		# else:
 		# 	time = "null"
-
-		print(item_supplier)
+		
 		# print(str(item_supplier.day)+" "+str(item_supplier.time.time()))
+		if not item_supplier.effective_start:
+			effective_start = None
+		else:
+			effective_start = str(item_supplier.effective_start)
+		
+		if not item_supplier.effective_end:
+			effective_end = None
+		else:
+			effective_end = str(item_supplier.effective_end)
+
 		data = json.dumps({
 			"supplier":item_supplier.supplier,
 			"item":item_supplier.item,
@@ -479,8 +488,8 @@ def export_item_suppliers():
 			"sizemaximum":item_supplier.size_maximum,
 			"hard_safety_leadtime":item_supplier.hard_safety_leadtime,
 			"extra_safety_leadtime":item_supplier.extra_safety_leadtime,
-			"effective_start":str(item_supplier.effective_start),
-			"effective_end": str(item_supplier.effective_end)
+			"effective_start":effective_start,
+			"effective_end": effective_end 
 			# "duration_per":(datetime(1900,1,1,0,0,0)+ operation.duration_per_unit).time(), 
 		})
 
@@ -502,9 +511,8 @@ def export_operations():
 		""",
 		as_dict=1)
 #timestamp(duration_per_unit) as "duration_per_unit", timestamp(duration) as "duration"
-	print(routing_operations,"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF")
 	for operation in routing_operations:
-		print(operation)
+		
 		search_mode =None
 		if operation.search_mode == 'priority':
 			search_mode="PRIORITY" 
@@ -591,7 +599,7 @@ def export_operation_materials():
 	as_dict=1)
 	
 	for material in materials:
-		print(material)
+		
 		data = json.dumps({
 			"operation":material.operation,
 			"item":material.item,
@@ -614,7 +622,7 @@ def export_operation_resources():
 	as_dict=1)
 
 	for resource in employee_resources:
-		print(resource)
+		
 		# if HUman Resource, then we let resource = "Operator"
 		data = json.dumps({
 			"operation":resource.operation,
@@ -633,7 +641,7 @@ def export_operation_resources():
 	as_dict=1)
 
 	for resource in workstation_resources:
-		print(resource)
+		
 		data = json.dumps({
 			"operation":resource.operation,
 			"resource":resource.resource,
@@ -655,7 +663,7 @@ def export_sales_orders():
 
 		
 	for sales_order in sales_orders:
-		print(sales_order)
+	
 		data = json.dumps({
 			"name": sales_order.name,
 			"description": sales_order.item_name + " ordered by " + sales_order.customer, #default
@@ -696,7 +704,7 @@ def get_frepple_params_for_forecast(api=None,filter=None):
 def export_frepple_forecast():
 	api="forecast"
 	url ,headers=get_frepple_params_for_forecast(api=api,filter=None)
-	print(url,headers)
+
 	forecast=frappe.db.sql(
 		"""
 		Select item,location,customer,forecast_method,planned,discrete,description,subcategory,
@@ -720,9 +728,9 @@ def export_frepple_forecast():
 				"location":fc.location,
 				"priority": fc.priority		
 		})
-		print(data)
+		
 		output = make_post_request(url,headers=headers, data=data)
-		print(output) 
+		
 	
 
 @frappe.whitelist()
@@ -739,7 +747,7 @@ def export_distribution_order():
 	as_dict=1)
 
 	for order in distribution_orders:
-		print(order)
+		
 		# if HUman Resource, then we let resource = "Operator"
 		data = json.dumps({
 			"item":order.item,
@@ -758,7 +766,7 @@ def export_distribution_order():
 	as_dict=1)
 
 	for resource in workstation_resources:
-		print(resource)
+	
 		data = json.dumps({
 			"operation":resource.operation,
 			"resource":resource.resource,
@@ -789,7 +797,7 @@ def export_frepple_sub_operation():
 			"effective_start":str(op.effective_start),
 			"effective_end":str(op.effective_end)
 		})
-		print(data)
+		
 		output = make_post_request(url,headers=headers, data=data)
 		
 
@@ -817,7 +825,7 @@ def export_frepple_operation_dependencies():
 			# "duration":add_seconds_to_time(op.duration),
 			# "duration_per":add_seconds_to_time(op.duration_per_unit),
 		})
-		print(data)
+		
 		output = make_post_request(url,headers=headers, data=data)
 		
 
@@ -837,10 +845,10 @@ def export_resource_detail():
 		output = make_post_request(url,headers=headers, data=data)
 		
 
-
-from datetime import timedelta
-
 def add_seconds_to_time(seconds):
+	if not seconds:
+		seconds = 0
+
 	delta = timedelta(seconds=seconds)
 	days = delta.days
 	time_str = str(delta - timedelta(days=days))

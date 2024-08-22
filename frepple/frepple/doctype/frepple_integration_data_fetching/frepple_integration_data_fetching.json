@@ -1,4 +1,5 @@
 {
+ "actions": [],
  "creation": "2022-01-26 16:52:32.954690",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -135,8 +136,7 @@
    "default": "0",
    "fieldname": "frepple_item_supplier",
    "fieldtype": "Check",
-   "label": "Frepple Item Supplier",
-   "read_only": 1
+   "label": "Frepple Item Supplier"
   },
   {
    "default": "0",
@@ -214,7 +214,8 @@
   }
  ],
  "issingle": 1,
- "modified": "2022-02-14 09:40:04.639244",
+ "links": [],
+ "modified": "2024-08-06 17:25:07.386391",
  "modified_by": "Administrator",
  "module": "Frepple",
  "name": "Frepple Integration Data Fetching",
@@ -234,5 +235,6 @@
  "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }
